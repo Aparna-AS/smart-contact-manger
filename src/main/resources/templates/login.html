@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title>login</title>
+  </head>
+  <body>
+    <div id="content">
+       <div class="grid grid-cols-12 w-full">
+
+    <!-- left space -->
+    <div class="col-span-4 md:col-span-2 lg:col-span-3 xl:col-span-4"></div>
+
+    <!-- center column -->
+    <div class="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-4">
+
+      <div class="bg-neutral-primary-soft block p-6 border border-default rounded-base shadow-xs 
+                  hover:bg-neutral-secondary-medium dark:bg-gray-800 dark:border-gray-700 
+                  dark:shadow-lg dark:hover:bg-gray-700">
+
+        <div data-th-replace ="message::messagebox"></div>          
+
+        <h5 class="text-black mb-3 text-2xl font-semibold tracking-tight text-heading leading-8 dark:text-white">
+        Login
+        </h5>
+
+        <div th:if="${param.logout}" class="mb-3 text-sm text-green-600 dark:text-green-400">
+          You have been logged out successfully.
+        </div>
+        <div th:if="${param.error}" class="mb-3 text-sm text-red-600 dark:text-red-400">
+          Invalid email or password. Please try again.
+        </div>
+
+        <!-- FORM START -->
+        <form
+        method="post"
+        data-th-action="@{'/authenticate'}" 
+        class="max-w-sm mx-auto mt-5">
+
+
+          <!-- EMAIL -->
+          <div class="mb-5">
+            <label for="email" class=" text-black block mb-2.5 text-sm font-medium text-heading dark:text-white">
+              Email
+            </label>
+            <input  name="email" type="email" id="email"
+                   class="text-blackbg-neutral-secondary-medium border border-default-medium text-heading text-sm 
+                          rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5
+                          shadow-xs placeholder:text-body dark:bg-gray-700 dark:border-gray-600 
+                          dark:text-white dark:placeholder-gray-400"
+                   placeholder="name@example.com" required />
+                   <!-- <p
+                  data-th-if="${#fields.hasErrors('email')}"
+                  data-th-errors="*{email}"
+                  class="text-red-600 px-1 py-2"
+                ></p> -->
+                   
+          </div>
+
+          <!-- PASSWORD -->
+          <div class="mb-5">
+            <label for=" password" class=" text-black block mb-2.5 text-sm font-medium text-heading dark:text-white">
+              Password
+            </label>
+            <input name="password" type="password" id="password" 
+                   class=" text-black bg-neutral-secondary-medium border border-default-medium text-heading text-sm 
+                          rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5
+                          shadow-xs placeholder:text-body dark:bg-gray-700 dark:border-gray-600 
+                          dark:text-white dark:placeholder-gray-400"
+                   placeholder="••••••••" required />
+                    <!-- <p
+                  data-th-if="${#fields.hasErrors('password')}"
+                  data-th-errors="*{password}"
+                  class="text-red-600 px-1 py-2"
+                ></p> -->
+                   
+          </div>
+
+        
+          <!-- BUTTONS -->
+          <div class="mb-3 flex justify-center space-x-3">
+
+            <button type="submit"
+              class="text-white bg-gray-900 rounded-2xl dark:hover:bg-blue-800 hover:bg-blue-900 
+                     box-border border border-transparent focus:ring-4
+                     focus:ring-blue-300 shadow-xs font-medium leading-5 
+                     text-sm px-4 py-2.5 focus:outline-none dark:bg-blue-600 
+                     dark:focus:ring-blue-400">
+              Login 
+            </button>
+
+
+
+            
+
+          </div>
+
+        </form>
+
+        <div class="socisl-buttons-container">
+          <a data-th-href="@{'/oauth2/authorization/google'}" class="text-gray-900 bg-white border border-gray-300 rounded-2xl hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 flex justify-center m-5">
+            <i class="fa-brands fa-google p-1"></i> Login with Google
+          </a>
+        </div>
+
+        <a
+        data-th-href="@{'/oauth2/authorization/github'}"
+        type="button" class="py-2 px-4 max-w-m  flex justify-center items-center bg-gray-600 hover:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-2" viewBox="0 0 1792 1792">
+    <path d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5q0 251-146.5 451.5t-378.5 277.5q-27 5-40-7t-13-30q0-3 .5-76.5t.5-134.5q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-119-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-85-13.5q-45 113-8 204-79 87-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-39 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 88.5t.5 54.5q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103zm-477 1103q3-7-7-12-10-3-13 2-3 7 7 12 9 6 13-2zm31 34q7-5-2-16-10-9-16-3-7 5 2 16 10 10 16 3zm30 45q9-7 0-19-8-13-17-6-9 5 0 18t17 7zm42 42q8-8-4-19-12-12-20-3-9 8 4 19 12 12 20 3zm57 25q3-11-13-16-15-4-19 7t13 15q15 6 19-6zm63 5q0-13-17-11-16 0-16 11 0 13 17 11 16 0 16-11zm58-10q-2-11-18-9-16 3-14 15t18 8 14-14z"></path>
+  </svg>
+  Sign in with GitHub
+</a>
+        <!-- FORM END -->
+
+      </div>
+    </div>
+
+    <!-- right space -->
+    <div class="hidden lg:block lg:col-span-3 xl:col-span-4"></div>
+
+  </div>
+
+
+    </div>
+    <script>
+      console.log("about page");
+    </script>
+    <script>
+      console.log("second about page script");
+    </script>
+  </body>
+</html>

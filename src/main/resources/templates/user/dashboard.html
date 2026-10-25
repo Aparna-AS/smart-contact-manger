@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}"/>
+    <link rel="stylesheet" data-th-href="@{'/css/main.css'}"/>
+</head>
+<body>
+    <h1 class="header_test">Hi, i am dashboard</h1>
+    <form th:action="@{/do-logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+
+</body>
+</html>
